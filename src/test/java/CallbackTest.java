@@ -42,9 +42,9 @@ public class CallbackTest {
 
     @Test
     void scorrectFillingOfTheForm() {
-        List<WebElement> input = driver.findElements(By.cssSelector("input"));
-        input.get(0).sendKeys("Олег Чебоксаров");
-        input.get(1).sendKeys("+78911728346");
+       WebElement form = driver.findElement(By.cssSelector("form"));
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Олег Чебоксаров");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79999999999");
         driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
         driver.findElement(By.cssSelector(".button__text")).click();
         String text = driver.findElement(By.cssSelector("[data-test-id='order-success']")).getText().trim();
@@ -53,9 +53,9 @@ public class CallbackTest {
 
     @Test
     void thePhoneFieldHasMoreThan11Digits() {
-        List<WebElement> input = driver.findElements(By.cssSelector("input"));
-        input.get(0).sendKeys("Олег Чебоксаров");
-        input.get(1).sendKeys("+789117283463123");
+        WebElement form = driver.findElement(By.cssSelector("form"));
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Олег Чебоксаров");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+789117283463123");
         driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
         driver.findElement(By.cssSelector(".button__text")).click();
         String text = driver.findElement(By.cssSelector(".input_invalid .input__sub")).getText().trim();
@@ -64,9 +64,9 @@ public class CallbackTest {
 
     @Test
     void thePhoneDoesntStartWithAPlus() {
-        List<WebElement> input = driver.findElements(By.cssSelector("input"));
-        input.get(0).sendKeys("Олег Чебоксаров");
-        input.get(1).sendKeys("8911728346");
+        WebElement form = driver.findElement(By.cssSelector("form"));
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Олег Чебоксаров");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("8911728346");
         driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
         driver.findElement(By.cssSelector(".button__text")).click();
         String text = driver.findElement(By.cssSelector(".input_invalid .input__sub")).getText().trim();
@@ -75,9 +75,9 @@ public class CallbackTest {
 
     @Test
     void firstNameSurnameHyphenated() {
-        List<WebElement> input = driver.findElements(By.cssSelector("input"));
-        input.get(0).sendKeys("Олег-Чебоксаров");
-        input.get(1).sendKeys("+78911728346");
+        WebElement form = driver.findElement(By.cssSelector("form"));
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Олег Чебоксаров-Иванов");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+78911728346");
         driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
         driver.findElement(By.cssSelector(".button__text")).click();
         String text = driver.findElement(By.cssSelector("[data-test-id='order-success']")).getText().trim();
@@ -86,9 +86,9 @@ public class CallbackTest {
 
     @Test
     void firstNameLastNameViaInEnglish() {
-        List<WebElement> input = driver.findElements(By.cssSelector("input"));
-        input.get(0).sendKeys("Oleg Cheboksarov");
-        input.get(1).sendKeys("+78911728346");
+        WebElement form = driver.findElement(By.cssSelector("form"));
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Oleg Cheboksarov");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+78911728346");
         driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
         driver.findElement(By.cssSelector(".button__text")).click();
         String text = driver.findElement(By.cssSelector(".input_invalid .input__sub")).getText().trim();
@@ -97,9 +97,9 @@ public class CallbackTest {
 
     @Test
     void minimumNumberOfDigitsInANumber() {
-        List<WebElement> input = driver.findElements(By.cssSelector("input"));
-        input.get(0).sendKeys("Олег Чебоксаров");
-        input.get(1).sendKeys("8");
+        WebElement form = driver.findElement(By.cssSelector("form"));
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Олег Чебоксаров");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("8");
         driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
         driver.findElement(By.cssSelector(".button__text")).click();
         String text = driver.findElement(By.cssSelector(".input_invalid .input__sub")).getText().trim();
@@ -108,9 +108,9 @@ public class CallbackTest {
 
     @Test
     void permissionIsNotChecked() {
-        List<WebElement> input = driver.findElements(By.cssSelector("input"));
-        input.get(0).sendKeys("Олег Чебоксаров");
-        input.get(1).sendKeys("+78911728346");
+        WebElement form = driver.findElement(By.cssSelector("form"));
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Олег Чебоксаров");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+78911728346");
         driver.findElement(By.cssSelector(".button__text")).click();
         String text = driver.findElement(By.cssSelector("[data-test-id='agreement'].input_invalid .checkbox__text")).getText().trim();
         assertEquals("Я соглашаюсь с условиями обработки и использования моих персональных данных и разрешаю сделать запрос в бюро кредитных историй", text);
@@ -118,8 +118,8 @@ public class CallbackTest {
 
     @Test
     void noName() {
-        List<WebElement> input = driver.findElements(By.cssSelector("input"));
-        input.get(1).sendKeys("+78911728346");
+        WebElement form = driver.findElement(By.cssSelector("form"));
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+78911728346");
         driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
         driver.findElement(By.cssSelector(".button__text")).click();
         String text = driver.findElement(By.cssSelector("[data-test-id='name'].input_invalid .input__sub")).getText().trim();
@@ -128,8 +128,8 @@ public class CallbackTest {
 
     @Test
     void noNumber() {
-        List<WebElement> input = driver.findElements(By.cssSelector("input"));
-        input.get(0).sendKeys("Олег Чебоксаров");
+        WebElement form = driver.findElement(By.cssSelector("form"));
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Олег Чебоксаров");
         driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
         driver.findElement(By.cssSelector(".button__text")).click();
         String text = driver.findElement(By.cssSelector("[data-test-id='phone'].input_invalid .input__sub")).getText().trim();
